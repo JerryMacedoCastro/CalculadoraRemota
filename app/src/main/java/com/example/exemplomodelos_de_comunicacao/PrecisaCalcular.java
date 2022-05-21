@@ -19,7 +19,7 @@ public class PrecisaCalcular {
         return result;
     }
 
-    public void calculoRemoto(String op) {
+    public void calculoRemotoSocket(String op) {
         CalculadoraSocket shs = null;
 
         switch (op){
@@ -45,16 +45,16 @@ public class PrecisaCalcular {
         CalculadoraHttpPOST shs = null;
         switch (op){
             case "soma":
-                shs = new CalculadoraHttpPOST(this.tv, this, "11", "15", 1);
+                shs = new CalculadoraHttpPOST(this.tv, this, "15", "15", 1);
                 break;
             case "sub":
-                shs = new CalculadoraHttpPOST(this.tv, this, "11", "15", 2);
+                shs = new CalculadoraHttpPOST(this.tv, this, "15", "15", 2);
                 break;
             case "mult":
-                shs = new CalculadoraHttpPOST(this.tv, this, "11", "15", 3);
+                shs = new CalculadoraHttpPOST(this.tv, this, "15", "15", 3);
                 break;
             case "div":
-                shs = new CalculadoraHttpPOST(this.tv, this, "11", "15", 4);
+                shs = new CalculadoraHttpPOST(this.tv, this, "15", "15", 4);
                 break;
         }
 

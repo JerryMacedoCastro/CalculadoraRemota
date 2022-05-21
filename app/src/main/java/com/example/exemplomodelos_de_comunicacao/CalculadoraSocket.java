@@ -16,7 +16,7 @@ public class CalculadoraSocket extends AsyncTask<Void, Void, String> {
     String oper1,oper2;
     PrecisaCalcular pc;
     int operacao;
-    public CalculadoraSocket(TextView tv, String oper1, String oper2, int op){
+    public CalculadoraSocket(TextView tv, String oper1, String oper2, int op) {
         this.tv=tv;
         this.oper1=oper1;
         this.oper2=oper2;
@@ -26,7 +26,7 @@ public class CalculadoraSocket extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... voids) {
-        String result="";
+        String result = "";
         //double oper1=10,oper2=20;
 
         try {
@@ -47,7 +47,7 @@ public class CalculadoraSocket extends AsyncTask<Void, Void, String> {
                     (new InputStreamReader(clientSocket.getInputStream()));
             result=messageFromServer.readLine();
 
-          //  System.out.println("resultado="+result);
+            //System.out.println("resultado="+result);
             clientSocket.close();
 
         } catch (IOException e) {
@@ -61,19 +61,18 @@ public class CalculadoraSocket extends AsyncTask<Void, Void, String> {
 
 
     @Override
-protected void onPreExecute() {
+    protected void onPreExecute() {
         //Codigo
-        }
+    }
 
 
-@Override
-protected void onPostExecute(String result) {
-        //Codigo
-           if(this.tv!=null) {
-               this.tv.setText(result);
-           }else {
-               this.pc.result_calculoRemoto(result);
-           }
-        }
-
+    @Override
+    protected void onPostExecute(String result) {
+       //Codigo
+       if(this.tv!=null) {
+           this.tv.setText(result);
+       } else {
+           this.pc.result_calculoRemoto(result);
+       }
+    }
 }

@@ -22,17 +22,16 @@ import javax.net.ssl.HttpsURLConnection;
 public class CalculadoraHttpPOST extends AsyncTask<Void, Void, String> {
 
     TextView tv;
-    String oper1,oper2;
+    String oper1, oper2;
     PrecisaCalcular pc;
     int op;
 
-    public CalculadoraHttpPOST(TextView tv, PrecisaCalcular pc, String oper1, String oper2, int op){
-        this.tv=tv;
-        this.oper1=oper1;
-        this.oper2=oper2;
-        this.pc=pc;
-        this.op = op;
-
+    public CalculadoraHttpPOST(TextView tv, PrecisaCalcular pc, String oper1, String oper2, int op) {
+        this.tv = tv;
+        this.oper1 = oper1;
+        this.oper2 = oper2;
+        this.pc = pc;
+        this.op = op; //1-somar 2-subtrair 3-multiplicar 4-dividir
     }
     @Override
     protected String doInBackground(Void... voids) {
@@ -50,18 +49,15 @@ public class CalculadoraHttpPOST extends AsyncTask<Void, Void, String> {
             //ENVIO DOS PARAMETROS
             OutputStream os = conn.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, StandardCharsets.UTF_8));
+                            new OutputStreamWriter(os, StandardCharsets.UTF_8));
             writer.write("oper1="+oper1+"&oper2="+oper2+"&operacao="+op);
             writer.flush();
             writer.close();
             os.close();
 
-            int responseCode=conn.getResponseCode();
+            int responseCode = conn.getResponseCode();
             if (responseCode == HttpsURLConnection.HTTP_OK) {
-
                 //RECBIMENTO DOS PARAMETROS
-
-
                 BufferedReader br = new BufferedReader(
                         new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
                 StringBuilder response = new StringBuilder();
@@ -74,22 +70,16 @@ public class CalculadoraHttpPOST extends AsyncTask<Void, Void, String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         return result;
-        //Codigo
     }
-
 
     @Override
     protected void onPreExecute() {
         //Codigo
     }
 
-
     @Override
     protected void onPostExecute(String result) {
-        //Codigo
         if(this.tv!=null) {
             this.tv.setText(result);
         }else {
@@ -98,4 +88,3 @@ public class CalculadoraHttpPOST extends AsyncTask<Void, Void, String> {
     }
 
 }
-
