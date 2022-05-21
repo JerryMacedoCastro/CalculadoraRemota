@@ -15,28 +15,25 @@ public class CalculadoraSocket extends AsyncTask<Void, Void, String> {
     TextView tv;
     String oper1,oper2;
     PrecisaCalcular pc;
-    public CalculadoraSocket(TextView tv, String oper1, String oper2){
+    int operacao;
+    public CalculadoraSocket(TextView tv, String oper1, String oper2, int op){
         this.tv=tv;
         this.oper1=oper1;
         this.oper2=oper2;
+        this.operacao = op;  //1-somar 2-subtrair 3-dividir 4-multiplicar
 
     }
-    public CalculadoraSocket(PrecisaCalcular pc, String oper1, String oper2){
-        this.tv=tv;
-        this.oper1=oper1;
-        this.oper2=oper2;
-        this.pc=pc;
 
-    }
     @Override
     protected String doInBackground(Void... voids) {
         String result="";
         //double oper1=10,oper2=20;
-        int operacao=1; //1-somar 2-subtrair 3-dividir 4-multiplicar
+
         try {
 
             //Conexão com o Servidor
-            Socket clientSocket = new Socket("192.168.0.11", 9090);
+            //usando o emulador o IP deve ser 10.0.2.2
+            Socket clientSocket = new Socket("10.0.2.2", 9090);
             DataOutputStream socketSaidaServer = new DataOutputStream(clientSocket.getOutputStream());
 
             //Enviando os dados

@@ -13,6 +13,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,17 +24,14 @@ public class CalculadoraHttpPOST extends AsyncTask<Void, Void, String> {
     TextView tv;
     String oper1,oper2;
     PrecisaCalcular pc;
-    public CalculadoraHttpPOST(TextView tv, String oper1, String oper2){
-        this.tv=tv;
-        this.oper1=oper1;
-        this.oper2=oper2;
+    int op;
 
-    }
-    public CalculadoraHttpPOST(PrecisaCalcular pc, String oper1, String oper2){
+    public CalculadoraHttpPOST(TextView tv, PrecisaCalcular pc, String oper1, String oper2, int op){
         this.tv=tv;
         this.oper1=oper1;
         this.oper2=oper2;
         this.pc=pc;
+        this.op = op;
 
     }
     @Override
@@ -52,8 +50,8 @@ public class CalculadoraHttpPOST extends AsyncTask<Void, Void, String> {
             //ENVIO DOS PARAMETROS
             OutputStream os = conn.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
-            writer.write("oper1="+oper1+"&oper2="+oper2+"&operacao=1");
+                    new OutputStreamWriter(os, StandardCharsets.UTF_8));
+            writer.write("oper1="+oper1+"&oper2="+oper2+"&operacao="+op);
             writer.flush();
             writer.close();
             os.close();
@@ -65,7 +63,7 @@ public class CalculadoraHttpPOST extends AsyncTask<Void, Void, String> {
 
 
                 BufferedReader br = new BufferedReader(
-                        new InputStreamReader(conn.getInputStream(), "utf-8"));
+                        new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
                 StringBuilder response = new StringBuilder();
                 String responseLine = null;
                 while ((responseLine = br.readLine()) != null) {
